@@ -5,6 +5,7 @@ node *create_node(void *data)
     node *node = malloc(sizeof(node));
     node->data = data;
     node->next = NULL;
+    node->prev = NULL;
     return node;
 }
 
@@ -17,6 +18,7 @@ node *create_circular_linked_list(void *data)
 {
     node *circular_linked_list = create_node(data);
     circular_linked_list->next = circular_linked_list;
+    circular_linked_list->prev = circular_linked_list;
     return circular_linked_list;
 }
 
@@ -36,6 +38,7 @@ node *add_circular_linked_list(node *circular_linked_list, void *data)
 
     // tmp node is now the last node of the circular linked list
     tmp_node->next = new_node;
+    new_node->prev = tmp_node;
 
     return circular_linked_list;
 }
