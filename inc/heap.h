@@ -1,7 +1,43 @@
-#ifndef __SECURE_HEAP_H__
-#define __SECURE_HEAP_H__
+#ifndef __HEAP_H__
+#define __HEAP_H__
 
 #include <stdlib.h>
+#include <stdint.h>
+
+// #ifdef DEBUG
+    #define STATIC
+// #else
+//     #define STATIC static
+// #endif
+
+
+#ifndef HEAP_SIZE
+    #define HEAP_SIZE    ( ( ( size_t ) ( 10 * 1024 ) ) )
+#endif
+
+#define ALIGN_BYTES     8
+#define ALIGN_MASK      (ALIGN_BYTES - 1)
+
+extern uint8_t ucHeap[ HEAP_SIZE ];
+
+/**
+ * @brief The linked list structure.
+ *
+ * This is used to link free blocks in order of their memory address.
+ */
+typedef struct A_BLOCK_LINK
+{
+    struct A_BLOCK_LINK * pxNextFreeBlock; /**< The next free block in the list. */
+    size_t xBlockSize;                     /**< The size of the free block. */
+} BlockLink_t;
+
+/**
+ * @brief Create a couple of list links to mark the start and end of the list.
+ */
+extern BlockLink_t xStart;
+extern BlockLink_t * pxEnd;
+
+extern size_t xFreeBytesRemaining;
 
 /**
  * @brief Allocates memory from heap.
@@ -20,18 +56,4 @@ void * pvPortMalloc( size_t xWantedSize );
  */
 void vPortFree( void * pv );
 
-/**
- * @brief Get the free heap size.
- *
- * @return Free heap size.
- */
-size_t xPortGetFreeHeapSize( void );
-
-/**
- * @brief Get the minimum ever free heap size.
- *
- * @return Minimum ever free heap size.
- */
-size_t xPortGetMinimumEverFreeHeapSize( void );
-
-#endif /* __SECURE_HEAP_H__ */
+#endif /* __HEAP_H__ */
