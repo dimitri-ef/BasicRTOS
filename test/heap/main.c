@@ -55,13 +55,13 @@ int main(void)
     printf("Allocated ptr1: %p\n", ptr1);
     printf("Allocated ptr2: %p\n", ptr2);
 
-    dumpHeapToDot("a.dot");
-
     vPortFree(ptr1);
     vPortFree(ptr2);
 
     void *ptr3 = pvPortMalloc(150);
     printf("Reused ptr3: %p\n", ptr3);
+
+    dumpHeapToDot("a.dot");
 
     return 0;
 }
