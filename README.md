@@ -7,7 +7,7 @@ blabla
 ## 📁 Structure du projet
 
 BasicRTOS/
-├── inc/
+├── inc/ d
 ├── src/
 ├── stmf411re/
 ├── tests/
