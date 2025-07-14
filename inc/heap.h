@@ -4,13 +4,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-// #ifdef DEBUG
-    #define STATIC
-// #else
-//     #define STATIC static
-// #endif
-
-
 #ifndef HEAP_SIZE
     #define HEAP_SIZE    ( ( ( size_t ) ( 10 * 1024 ) ) )
 #endif

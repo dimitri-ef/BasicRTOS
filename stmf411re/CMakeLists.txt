@@ -66,3 +66,19 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
 )
+
+add_custom_command(
+    OUTPUT ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin
+    COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_PROJECT_NAME}.elf ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin
+    DEPENDS ${CMAKE_PROJECT_NAME}
+    COMMENT "Creating binary file from ELF"
+)
+
+add_custom_target(bin ALL DEPENDS ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin)
+
+add_custom_target(flash
+    COMMAND st-flash --reset write ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin 0x08000000
+    DEPENDS bin
+    COMMENT "Flashing the STM32 with st-flash"
+    VERBATIM
+)
