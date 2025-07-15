@@ -1,17 +1,24 @@
+# .github/workflows/ci.yml
+
 name: CI
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: sudo apt update && sudo apt install -y cmake build-essential gcc
+    - name: Set up CMake + GCC
+      run: sudo apt-get update && sudo apt-get install -y cmake gcc
 
-      - name: Run tests
-        run: ./build.sh --run-tests
+    - name: Build tests
+      run: ./build.sh --build-tests
+
+    - name: Run tests
+      run: ./build.sh --run-tests
