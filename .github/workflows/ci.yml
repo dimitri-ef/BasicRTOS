@@ -18,7 +18,7 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y cmake gcc
 
     - name: Build tests
-      run: ./build.sh --build-tests
+      run: ./basicFreeRTOS.sh --build-tests
 
     - name: Run tests
-      run: ./build.sh --run-tests
+      run: ./basicFreeRTOS.sh --run-tests
