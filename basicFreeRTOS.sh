@@ -65,7 +65,7 @@ if [ $BUILD_TEST -eq $TRUE ]; then
 fi
 
 if [ $RUN_TESTS -eq $TRUE ]; then
-    cd builds/test_build; ctest; cd -
+    cd builds/test_build; ctest --output-on-failure --output-junit test_results.xml; cd -
 fi
 
 if [ $BUILD_BOARD -eq $TRUE ]; then

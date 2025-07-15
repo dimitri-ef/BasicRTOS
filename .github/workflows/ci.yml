@@ -23,8 +23,9 @@ jobs:
     - name: Run tests
       run: ./basicFreeRTOS.sh --run-tests
 
-    - name: Upload test log
-      uses: actions/upload-artifact@v4
+    - name: Publish test report to GitHub
+      uses: dorny/test-reporter@v1
       with:
-        name: ctest-log
-        path: builds/test_build/Testing/Temporary/LastTest.log
+        name: CTest Results
+        path: builds/test_build/test_results.xml
+        reporter: github-pr-check
