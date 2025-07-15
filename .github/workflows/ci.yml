@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ctest-log
-        path: build/tests/Testing/Temporary/LastTest.log
+        path: builds/test_build/Testing/Temporary/LastTest.log
