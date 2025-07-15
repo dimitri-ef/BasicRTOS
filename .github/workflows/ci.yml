@@ -24,7 +24,7 @@ jobs:
       run: ./basicFreeRTOS.sh --run-tests
 
     - name: Upload test log
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ctest-log
         path: build/tests/Testing/Temporary/LastTest.log
