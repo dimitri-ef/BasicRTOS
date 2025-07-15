@@ -1,0 +1,16 @@
+project(test_list C)
+
+include_directories("../../inc")
+add_executable(test_list src/main.c ../../src/list.c)
+
+add_test(NAME test_vListInitialise_sets_defaults COMMAND test_list test_vListInitialise_sets_defaults)
+add_test(NAME test_vListInitialiseItem_sets_null COMMAND test_list test_vListInitialiseItem_sets_null)
+add_test(NAME test_vListInsert_single_item COMMAND test_list test_vListInsert_single_item)
+add_test(NAME test_vListInsert_multiple_sorted COMMAND test_list test_vListInsert_multiple_sorted)
+add_test(NAME test_vListInsertEnd_appends_item COMMAND test_list test_vListInsertEnd_appends_item)
+add_test(NAME test_uxListRemove_decrements_count COMMAND test_list test_uxListRemove_decrements_count)
+add_test(NAME test_remove_middle_of_three COMMAND test_list test_remove_middle_of_three)
+add_test(NAME test_remove_head_and_tail COMMAND test_list test_remove_head_and_tail)
+add_test(NAME test_insert_same_priority_keeps_order COMMAND test_list test_insert_same_priority_keeps_order)
+add_test(NAME test_index_update_on_remove COMMAND test_list test_index_update_on_remove)
+add_test(NAME test_remove_updates_links_correctly COMMAND test_list test_remove_updates_links_correctly)

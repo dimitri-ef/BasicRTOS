@@ -2,8 +2,15 @@
 #define __LIST_H__
 
 #include <stddef.h>
+#include <stdint.h>
 
 typedef uint32_t UBaseType_t;
+typedef uint32_t TickType_t;
+
+#define pdTRUE  1
+#define pdFALSE 0
+
+#define portMAX_DELAY ((TickType_t) 0xffffffffUL)
 
 struct xLIST;
 struct xLIST_ITEM
@@ -22,6 +29,90 @@ typedef struct xLIST
     ListItem_t * volatile pxIndex;
     ListItem_t xListEnd;
 } List_t;
+
+/**
+ * Access macro to set the owner of a list item.  The owner of a list item
+ * is the object (usually a TCB) that contains the list item.
+ *
+ * \page listSET_LIST_ITEM_OWNER listSET_LIST_ITEM_OWNER
+ * \ingroup LinkedList
+ */
+#define listSET_LIST_ITEM_OWNER( pxListItem, pxOwner )    ( ( pxListItem )->pvOwner = ( void * ) ( pxOwner ) )
+
+/**
+ * Access macro to get the owner of a list item.  The owner of a list item
+ * is the object (usually a TCB) that contains the list item.
+ *
+ * \page listGET_LIST_ITEM_OWNER listSET_LIST_ITEM_OWNER
+ * \ingroup LinkedList
+ */
+#define listGET_LIST_ITEM_OWNER( pxListItem )             ( ( pxListItem )->pvOwner )
+
+/**
+ * Access macro to set the value of the list item.  In most cases the value is
+ * used to sort the list in ascending order.
+ *
+ * \page listSET_LIST_ITEM_VALUE listSET_LIST_ITEM_VALUE
+ * \ingroup LinkedList
+ */
+#define listSET_LIST_ITEM_VALUE( pxListItem, xValue )     ( ( pxListItem )->xItemValue = ( xValue ) )
+
+/**
+ * Access macro to retrieve the value of the list item.  The value can
+ * represent anything - for example the priority of a task, or the time at
+ * which a task should be unblocked.
+ *
+ * \page listGET_LIST_ITEM_VALUE listGET_LIST_ITEM_VALUE
+ * \ingroup LinkedList
+ */
+#define listGET_LIST_ITEM_VALUE( pxListItem )             ( ( pxListItem )->xItemValue )
+
+/**
+ * Access macro to retrieve the value of the list item at the head of a given
+ * list.
+ *
+ * \page listGET_LIST_ITEM_VALUE listGET_LIST_ITEM_VALUE
+ * \ingroup LinkedList
+ */
+#define listGET_ITEM_VALUE_OF_HEAD_ENTRY( pxList )        ( ( ( pxList )->xListEnd ).pxNext->xItemValue )
+
+/**
+ * Return the list item at the head of the list.
+ *
+ * \page listGET_HEAD_ENTRY listGET_HEAD_ENTRY
+ * \ingroup LinkedList
+ */
+#define listGET_HEAD_ENTRY( pxList )                      ( ( ( pxList )->xListEnd ).pxNext )
+
+/**
+ * Return the next list item.
+ *
+ * \page listGET_NEXT listGET_NEXT
+ * \ingroup LinkedList
+ */
+#define listGET_NEXT( pxListItem )                        ( ( pxListItem )->pxNext )
+
+/**
+ * Return the list item that marks the end of the list
+ *
+ * \page listGET_END_MARKER listGET_END_MARKER
+ * \ingroup LinkedList
+ */
+#define listGET_END_MARKER( pxList )                      ( ( ListItem_t const * ) ( &( ( pxList )->xListEnd ) ) )
+
+/**
+ * Access macro to determine if a list contains any items.  The macro will
+ * only have the value true if the list is empty.
+ *
+ * \page listLIST_IS_EMPTY listLIST_IS_EMPTY
+ * \ingroup LinkedList
+ */
+#define listLIST_IS_EMPTY( pxList )                       ( ( ( pxList )->uxNumberOfItems == ( UBaseType_t ) 0 ) ? pdTRUE : pdFALSE )
+
+/**
+ * Access macro to return the number of items in the list.
+ */
+#define listCURRENT_LIST_LENGTH( pxList )                 ( ( pxList )->uxNumberOfItems )
 
 /**
  * Must be called before a list is used!  This initialises all the members
