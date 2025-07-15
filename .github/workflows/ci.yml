@@ -28,4 +28,4 @@ jobs:
       with:
         name: CTest Results
         path: builds/test_build/test_results.xml
-        reporter: github-pr-check
+        reporter: github-pr-review
