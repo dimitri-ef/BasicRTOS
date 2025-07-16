@@ -26,7 +26,7 @@ BasicRTOS/
 - [x] Implementation of the heap  
 - [ ] Add tests for linked list and heap
 - [ ] Integration of FreeRTOS context switching code (PendSV-based) into my implementation for ARM Cortex-M4 (GCC toolchain)
-- [ ] Implement tasks with preemptive scheduling logic, including task delay and priority management  
-- [ ] Testing on STM32F411RE  
+- [ ] Implement tasks with preemptive scheduling logic, including task delay and priority management
+- [ ] Testing on STM32F411RE
 - [ ] Add CI/CD pipeline
 - [ ] Add mutexes and semaphores

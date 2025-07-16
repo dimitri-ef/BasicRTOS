@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "basicFreeRTOS.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,7 +54,16 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void vTaskBlinkLed(void *pvParameters)
+{
+  (void) pvParameters;
 
+  for(;;)
+  {
+    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+    vTaskDelay(pdMS_TO_TICKS(1000));
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -74,7 +83,14 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  xTaskCreate(
+    vTaskBlinkLed,
+    "MaTache",
+    128,
+    NULL,
+    0,
+    NULL
+  );
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -94,8 +110,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

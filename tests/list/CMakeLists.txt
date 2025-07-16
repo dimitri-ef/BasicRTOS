@@ -1,7 +1,7 @@
 project(test_list C)
 
-include_directories("../../inc")
-add_executable(test_list src/main.c ../../src/list.c)
+include_directories("../../basicFreeRTOS/inc")
+add_executable(test_list src/main.c ../../basicFreeRTOS/src/list.c)
 
 add_test(NAME test_vListInitialise_sets_defaults COMMAND test_list test_vListInitialise_sets_defaults)
 add_test(NAME test_vListInitialiseItem_sets_null COMMAND test_list test_vListInitialiseItem_sets_null)
